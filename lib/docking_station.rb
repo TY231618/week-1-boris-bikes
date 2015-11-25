@@ -1,25 +1,17 @@
+require_relative '../lib/bike.rb'
+
 class DockingStation
 
-attr_reader :bikes
-
-  def initialize
-
-    @bikes = 10
-  end
+attr_accessor :any_bikes
 
   def release_bike
-    @bikes -= 1
-
-    bike = Bike.new
+    fail 'no bikes available' unless @any_bikes
+    @any_bikes
   end
 
   def dock(bike)
-    @bikes += 1
-    bike.status = 'docked'
-  end
-
-  def any_bikes
-    return true if @bikes > 0
+    fail 'station full' if @any_bikes
+    @any_bikes = bike
   end
 
 end
